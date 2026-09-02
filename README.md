@@ -5,11 +5,11 @@ Personal portfolio website showcasing projects, skills, and experience in full-s
 ## 🚀 Quick Overview
 
 Welcome to my portfolio! I'm a passionate full-stack developer specializing in:
-- **Full-Stack Web Development** (TypeScript, JavaScript, Python)
+- **Full-Stack Web Development** (TypeScript, JavaScript, Python, Kotlin)
 - **AI/ML Integration** (LLMs, RAG, AI Agents)
-- **E-Commerce Solutions**
+- **Content & Chat Platforms**
 - **Audio & Media Technologies**
-- **Desktop Applications**
+- **Real Estate & E-Commerce Solutions**
 
 ## 📁 Repository Structure
 
@@ -28,37 +28,43 @@ portfolio/
 └── README.md              # This file
 ```
 
-## ✨ Featured Projects
+## ✨ Pinned Featured Projects
 
 ### 🎵 3WM SONIK LABS
 Revolutionary audio production platform built for African producers and the next generation of music creators.
 - **Tech:** TypeScript, Audio APIs
+- **Description:** ONE VISION. THREE MINDS. INFINITE SOUND. BUILT FOR THE SOUND OF AFRICA.
 - **Repository:** [View Project](https://github.com/FeexSystems/3WM-SONIK-LABS)
 
 ### 🏛️ HoloKai Systems
 Cultural heritage preservation platform - "Where Civilizations Remember"
 - **Tech:** JavaScript, Full-Stack
+- **Description:** Platform designed to preserve and share cultural heritage through innovative technology
 - **Repository:** [View Project](https://github.com/FeexSystems/HoloKai-Systems-Labs)
 
-### 🤖 AnythingLLM
-All-in-one AI desktop application with RAG, AI agents, and MCP compatibility
-- **Tech:** Docker, Python, AI/ML
-- **Repository:** [View Project](https://github.com/FeexSystems/anything-llm)
+### 💬 VYRA LABS
+Chat-first interface content platform
+- **Tech:** Kotlin, Chat Interface, AI
+- **Description:** Experience the future of content interaction through conversational AI and intelligent communication systems
+- **Repository:** [View Project](https://github.com/FeexSystems/VYRA-LABS)
+
+### 🏠 Rental Paradise
+Premium property rental platform
+- **Tech:** TypeScript, React
+- **Description:** Discover, explore, and book your perfect vacation or long-term rental with modern web technologies
+- **Repository:** [View Project](https://github.com/FeexSystems/Rental-Paradise)
 
 ### 💬 Gemini CLI
 Open-source AI agent bringing Google Gemini directly to your terminal
-- **Tech:** TypeScript, AI/APIs
+- **Tech:** TypeScript, AI/APIs, CLI
+- **Description:** Streamlined AI interactions for developers building intelligent CLI tools
 - **Repository:** [View Project](https://github.com/FeexSystems/gemini-cli)
 
-### 🛍️ Omonormi E-Commerce
-Full-featured e-commerce platform with product management and checkout
-- **Tech:** TypeScript, React
-- **Repository:** [View Project](https://github.com/FeexSystems/OMONORMI-SHOPIFY)
-
-### 📋 BFX Check Printing Suite
-Multi-platform tools for managing and printing financial checks
-- **Tech:** Vue.js, Python, GTK4
-- **Repository:** [View Project](https://github.com/FeexSystems/BFXprintmechecks)
+### 💼 Portfolio
+Personal portfolio website
+- **Tech:** HTML5/CSS3, JavaScript, Responsive Design
+- **Description:** A clean, responsive design highlighting my journey as a full-stack developer and innovator
+- **Repository:** [View Project](https://github.com/FeexSystems/portfolio)
 
 ## 🛠️ Technology Stack
 
@@ -66,6 +72,7 @@ Multi-platform tools for managing and printing financial checks
 - JavaScript / TypeScript
 - Python
 - Java
+- Kotlin
 - SQL
 
 ### Frontend
@@ -133,7 +140,7 @@ Check out the [blog section](blog/README.md) for upcoming articles about:
 
 - **GitHub:** [@FeexSystems](https://github.com/FeexSystems)
 - **Email:** contact@feexsystems.com
-- **All Projects:** Visit my GitHub profile for 25+ additional projects
+- **All Projects:** Visit my GitHub profile for 30+ additional projects
 
 ## 📊 Repository Statistics
 

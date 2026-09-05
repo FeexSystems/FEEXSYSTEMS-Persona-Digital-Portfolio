@@ -8,7 +8,7 @@ export function createWorldModelAgentTools({ model, intelligence = null } = {}) 
     compare: (left, right) => ({ left, right, changed: JSON.stringify(left) !== JSON.stringify(right) }),
     analyzeChange: async event => {
       if (!event?.repository) return [];
-      return [{ type: 'repository-sync', source: 'github-webhook/change-detector', autoCommit: false, entity: { id: `repo:${event.repository}`, type: 'REPOSITORY', name: event.repository, metadata: { lastCommitSha: event.after, lastChangeAt: event.receivedAt } } }].map(p => ({ type: 'UPSERT_ENTITY', ...p }));
+      return [{ type: 'UPSERT_ENTITY', source: 'github-webhook/change-detector', autoCommit: false, entity: { id: `repo:${event.repository}`, type: 'REPOSITORY', name: event.repository, metadata: { lastCommitSha: event.after, lastChangeAt: event.receivedAt } } }];
     },
   };
 }

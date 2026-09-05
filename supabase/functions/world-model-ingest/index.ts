@@ -3,6 +3,10 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const GH = "https://api.github.com";
 const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+const worlds = [
+  ["3wm","3WM SONIK LABS","AUDIO"],["holokai","HOLOKAI","CULTURE"],["yurrheeler","YURRHEELER AI","HEALTH"],
+  ["kappaxchangefin","KAPPAXCHANGEFIN","FINTECH"],["vyra","VYRA LABS","INTERFACE"],["rental","RENTAL PARADISE","REAL ESTATE"],
+];
 const seeds = [
   { world:"3wm", owner:"FeexSystems", repo:"3WM-SONIK-LABS", url:"https://github.com/FeexSystems/3WM-SONIK-LABS" },
   { world:"holokai", owner:"FeexSystems", repo:"HoloKai-Systems-Labs", url:"https://github.com/FeexSystems/HoloKai-Systems-Labs" },
@@ -18,6 +22,7 @@ function version(v:string) { return v?.match(/[v=]?([0-9]+\.[0-9]+(?:\.[0-9]+)?)
 
 Deno.serve(async req => {
   if(req.method!=="POST") return new Response("Method Not Allowed",{status:405});
+  for(const [id,label,domain] of worlds) await db.from("world_model_entities").upsert({id:`world:${id}`,entity_type:"WORLD",label,payload:{domain},source:"persona-registry",updated_at:new Date().toISOString()});
   let total=0;
   for(const seed of seeds){
     const meta=await gh(`/repos/${seed.owner}/${seed.repo}`);

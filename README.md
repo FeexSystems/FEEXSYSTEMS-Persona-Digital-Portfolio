@@ -8,71 +8,156 @@
 
 ## 01 — What This Is
 
-FeexSystems Portfolio OS is no longer designed as a conventional portfolio page. It is being evolved into an **interactive persona digital operating environment**: a navigable interface representing the builder as a connected ecosystem of identity, projects, technologies, experiments, and digital worlds.
-
-The interface treats a portfolio as a **world model**, not a document.
+FeexSystems Portfolio OS is an interactive **persona digital operating environment** rather than a conventional portfolio. Projects, capabilities and artifacts are modeled as connected worlds and nodes in a navigable knowledge graph.
 
 ```text
-PERSONA
-   ↓
-WORLD MODEL
-   ↓
-SYSTEMS / WORLDS
-   ↓
-PROJECTS / ARTIFACTS
-   ↓
-CAPABILITIES / TECHNOLOGY
-   ↓
-ACTIVITY / SIGNALS
-   ↓
-COMMAND CENTER
+PERSONA → DIGITAL TWIN → KNOWLEDGE GRAPH → AI NAVIGATOR → 3D WORLD
 ```
 
-## 02 — Experience Model
+## 02 — Phase III-C: Graph + Navigator
 
-The environment is organized around six layers:
+The planetary core now visualizes the underlying graph directly:
 
-| Layer | Purpose |
-|---|---|
-| **Persona** | Identity, philosophy, presence, availability and narrative |
-| **World Model** | The 3D planetary representation of the portfolio ecosystem |
-| **Systems** | Major products, platforms and engineering worlds |
-| **Capabilities** | AI, full-stack, infrastructure, data, security and creative technology |
-| **Artifacts** | Case studies, repositories, experiments, media and technical work |
-| **Command Center** | Search, navigation, system state and future AI-assisted interaction |
+- **World nodes** orbit the planetary core.
+- **Capability nodes** form a secondary constellation.
+- **Connection arcs** encode world → capability relationships.
+- **Focus mode** dims unrelated nodes and emphasizes the selected neighborhood.
+- **Camera zoom** moves closer to the active graph neighborhood.
+- **Pointer interaction** selects world nodes directly on the planet.
+- **Animated rings and node pulses** provide live system telemetry.
+- **World transitions** synchronize graph focus, Digital Twin state and system cards.
 
-## 03 — Current Interface
+### Knowledge Graph
 
-### Planetary Core
+The graph is generated from the Persona Registry rather than hard-coded into the renderer.
 
-The home environment presents a WebGL planetary core with:
+```text
+                         PERSONA CORE
+                              │
+            ┌─────────────────┼─────────────────┐
+            │                 │                 │
+          WORLDS         CAPABILITIES       RELATIONS
+            │                 │                 │
+     ┌──────┼──────┐          │          WORLD → CAPABILITY
+     ▼      ▼      ▼          ▼
+    3WM   HOLOKAI YURRHEELER  AI / ML
+     │      │       │         FINTECH
+     └──────┼───────┼──────── DATA
+            ▼       ▼
+       KAPPAXCHANGEFIN
+            │
+        PAYMENTS / FINTECH
+```
 
-- Procedural star field
-- Atmospheric rendering
-- Orbital geometry
-- Pointer-responsive camera/planet motion
-- Interactive hotspots
-- Ambient visual telemetry
-- Responsive mobile scaling
-
-### System Worlds
-
-Selected projects are presented as worlds inside the ecosystem:
+## 03 — System Worlds
 
 - **3WM SONIK LABS** — AI-native audio / DSP
 - **HoloKai** — cultural intelligence / world models / 3D
 - **Yurrheeler AI** — multi-agent healthcare intelligence
-- **OjaChat** — conversational commerce / vector systems
+- **KappaXchangefin** — fintech / payments / AI / financial infrastructure
 - **VYRA LABS** — conversational interfaces / intelligent media
 - **Rental Paradise** — property discovery / digital commerce
 
-### Capability Constellation
+OjaChat has been removed from the active Persona OS world registry and replaced by **KappaXchangefin**.
 
-The engineering substrate is represented as a connected constellation:
+## 04 — AI Navigator
 
-`AI/ML · FULL-STACK · INFRA · DATA · CREATIVE TECH · SECURITY`
+The Navigator currently operates against the local Knowledge Graph and can resolve natural-language intent into connected worlds.
 
-## 04 — Persona OS Roadmap
+Example queries:
+
+```text
+“Show me the fintech systems.”
+“Which worlds use AI?”
+“Find projects related to payments.”
+“How many worlds are connected?”
+```
+
+Resolution pipeline:
+
+```text
+USER QUERY
+   ↓
+INTENT / KEYWORD RESOLUTION
+   ↓
+KNOWLEDGE GRAPH SEARCH
+   ↓
+WORLD + CAPABILITY MATCH
+   ↓
+CONTEXT RESPONSE
+   ↓
+SPATIAL NAVIGATION
+   ↓
+DIGITAL TWIN FOCUS
+```
+
+The architecture is intentionally provider-neutral. A future model-backed layer can replace or augment the local resolver without changing the graph or rendering contract.
+
+## 05 — Interaction Model
+
+### Focus
+
+Selecting a world activates its graph neighborhood. Connected capability nodes remain emphasized while unrelated nodes recede.
+
+### Zoom
+
+Mouse wheel / trackpad input changes the planetary camera distance, allowing the visitor to move from ecosystem-level context toward an active world.
+
+### Spatial selection
+
+World nodes are raycast targets in the Three.js scene. Selecting one updates:
+
+1. Digital Twin focus
+2. Graph focus
+3. Camera zoom
+4. System-card selection
+5. World navigation state
+
+### World transition
+
+```text
+CLICK / AI RESULT
+       ↓
+WORLD ID
+       ↓
+PERSONA TWIN ENTER
+       ↓
+GRAPH FOCUS
+       ↓
+CAMERA ZOOM
+       ↓
+SYSTEM WORLD HIGHLIGHT
+```
+
+## 06 — Architecture
+
+```text
+Browser
+  │
+  ├── index.html
+  ├── styles/main.css
+  │
+  └── ES Modules
+        │
+        ├── persona-registry.js
+        │      └── worlds / capabilities / relations
+        │
+        ├── digital-twin.js
+        │      └── presence / focus / session state
+        │
+        ├── ai-navigator.js
+        │      └── graph-aware semantic resolver
+        │
+        └── main.js
+               ├── Three.js planetary renderer
+               ├── graph nodes
+               ├── connection arcs
+               ├── focus / zoom controller
+               ├── raycast interaction
+               └── world transition bus
+```
+
+## 07 — Roadmap
 
 ### Phase I — Planetary Foundation
 
@@ -83,148 +168,74 @@ The engineering substrate is represented as a connected constellation:
 - [x] System-world cards
 - [x] Capability constellation
 - [x] Boot sequence
-- [x] Ambient interaction
 - [x] Responsive experience
 
 ### Phase II — Interactive Persona OS
 
-- [ ] Persistent persona state
-- [ ] Command palette
-- [ ] Keyboard-first navigation
-- [ ] System/world selection state
-- [ ] Planetary camera transitions
-- [ ] Interactive project planets
-- [ ] Project detail portals
-- [ ] Timeline / activity layer
-- [ ] Live GitHub telemetry
-- [ ] Searchable knowledge graph
-- [ ] Persona profile layer
-- [ ] Availability / engagement state
+- [x] Command palette
+- [x] Keyboard-first navigation
+- [x] System/world selection state
+- [x] Planetary camera interaction
+- [x] Persistent Digital Twin state
+- [x] Persona HUD
 
-### Phase III — Digital Twin Interface
+### Phase III-C — Knowledge Graph + AI Navigator
 
-- [ ] AI portfolio navigator
-- [ ] Natural-language command layer
-- [ ] Semantic project search
-- [ ] Dynamic knowledge graph
-- [ ] Context-aware project recommendations
-- [ ] Voice interaction
-- [ ] Persona memory architecture
-- [ ] Real-time system activity visualization
-- [ ] Interactive 3D environments
-- [ ] Persistent user session state
+- [x] Persona Registry
+- [x] Knowledge Graph generation
+- [x] Graph-aware local Navigator
+- [x] World → capability relationships
+- [x] Animated planetary graph nodes
+- [x] Connection arcs
+- [x] Node focus / neighborhood highlighting
+- [x] Camera zoom / focus state
+- [x] Spatial world selection
+- [x] AI result → world transition
+- [x] KappaXchangefin integration
+
+### Phase III-D — Intelligent World Model
+
+- [ ] Graph database persistence
+- [ ] Repository-aware project nodes
+- [ ] Artifact nodes and case studies
+- [ ] Technology/version nodes
+- [ ] Timeline edges
+- [ ] GitHub telemetry ingestion
+- [ ] Embedding-based retrieval
+- [ ] Model-backed conversational reasoning
+- [ ] Multi-turn Navigator memory
+- [ ] Explainable relationship paths
+- [ ] Voice Navigator
 
 ### Phase IV — FEEX WORLD
 
 ```text
-                 ┌─────────────────┐
-                 │     PERSONA     │
-                 └────────┬────────┘
-                          │
-              ┌───────────▼───────────┐
-              │      WORLD MODEL      │
-              └───────────┬───────────┘
-                          │
-       ┌──────────────────┼──────────────────┐
-       ▼                  ▼                  ▼
-   SYSTEM WORLDS      CAPABILITY         ARTIFACTS
-       │              CONSTELLATION          │
-       └──────────────────┬──────────────────┘
-                          ▼
-                 ┌─────────────────┐
-                 │ COMMAND CENTER  │
-                 └────────┬────────┘
-                          ▼
-                    AI NAVIGATOR
+                         PERSONA
+                            │
+                       DIGITAL TWIN
+                            │
+                      WORLD MODEL
+                            │
+                    KNOWLEDGE GRAPH
+                            │
+          ┌─────────────────┼─────────────────┐
+          ▼                 ▼                 ▼
+       WORLDS          CAPABILITIES       ARTIFACTS
+          │                 │                 │
+          └─────────────────┼─────────────────┘
+                            ▼
+                       AI NAVIGATOR
+                            │
+                     COMMAND BUS / API
+                            │
+                       3D WORLD ENGINE
+                            │
+                       PLANETARY UI
 ```
 
-The long-term objective is an interface that feels closer to a **personal digital headquarters** than a website.
+## 08 — Development
 
-## 05 — Technical Architecture
-
-The current implementation intentionally remains lightweight while the experience is being proven.
-
-```text
-Browser
-  │
-  ├── HTML semantic shell
-  ├── CSS visual system
-  └── ES Modules
-        │
-        └── Three.js WebGL engine
-              ├── Planetary scene
-              ├── Atmosphere
-              ├── Stars
-              ├── Lighting
-              └── Interaction loop
-```
-
-Planned evolution:
-
-```text
-React / TypeScript UI
-        │
-        ├── Persona State
-        ├── World Model
-        ├── Command Bus
-        ├── Knowledge Graph
-        ├── Project Registry
-        ├── Activity Stream
-        └── AI Navigator
-                 │
-              WebGL / 3D
-                 │
-          Planetary Experience
-```
-
-## 06 — Repository Structure
-
-```text
-portfolio/
-├── index.html
-├── styles/
-│   └── main.css
-├── js/
-│   └── main.js
-├── resume/
-│   └── CV.md
-├── blog/
-│   └── README.md
-├── package.json
-└── README.md
-```
-
-The structure will evolve toward a componentized application as the Persona OS moves into its next engineering phase.
-
-## 07 — Design Principles
-
-### World, not page
-
-Every major capability should feel like a location or system inside a larger digital world.
-
-### State, not static content
-
-The environment should react to navigation, selection, activity, availability and user intent.
-
-### Spatial navigation
-
-3D space should communicate relationships rather than exist purely as decoration.
-
-### Progressive disclosure
-
-The interface exposes complexity gradually: overview → world → system → artifact → architecture.
-
-### Technical transparency
-
-The portfolio should demonstrate how systems are engineered, not merely show screenshots of finished products.
-
-### Human + machine
-
-The persona layer represents the human builder; the AI layer becomes an interface for navigating the body of work.
-
-## 08 — Local Development
-
-The current foundation can run as a static site.
+The current foundation can run as a static site:
 
 ```bash
 python -m http.server 8000
@@ -236,53 +247,27 @@ Then open:
 http://localhost:8000
 ```
 
-The planetary renderer loads Three.js as an ES module from a CDN.
+Three.js is currently loaded as an ES module from a CDN.
 
-## 09 — Featured Systems
+## 09 — Design Principles
 
-### 3WM SONIK LABS
+**World, not page** — major capabilities should feel like locations inside a larger digital environment.
 
-AI-native audio production infrastructure focused on creative tooling, DSP and intelligent music workflows.
+**State, not static content** — navigation changes the Digital Twin and spatial presentation.
 
-**Repository:** https://github.com/FeexSystems/3WM-SONIK-LABS
+**Spatial meaning** — 3D geometry communicates relationships rather than serving only as decoration.
 
-### HoloKai Systems
+**Progressive disclosure** — ecosystem → world → capability → artifact → architecture.
 
-A digital civilization intelligence concept focused on preserving, indexing and experiencing cultural heritage.
+**Technical transparency** — the environment demonstrates systems thinking and architecture.
 
-**Repository:** https://github.com/FeexSystems/HoloKai-Systems-Labs
-
-### Yurrheeler AI
-
-A multi-agent healthcare intelligence interface built around coordinated expert reasoning.
-
-**Repository:** https://github.com/FeexSystems/yurrhealer-med-advisor
-
-### OjaChat
-
-Conversational commerce infrastructure connecting users, products and intelligent recommendations.
-
-**Repository:** https://github.com/FeexSystems/OjaChat
-
-### VYRA LABS
-
-A chat-first interface experiment for intelligent content and communication.
-
-**Repository:** https://github.com/FeexSystems/VYRA-LABS
-
-### Rental Paradise
-
-A modern property discovery and rental experience.
-
-**Repository:** https://github.com/FeexSystems/Rental-Paradise
+**Human + machine** — the human builder is represented by the Persona layer; AI becomes the navigation interface to the body of work.
 
 ## 10 — Vision
 
-FeexSystems is being built around a simple premise:
-
 > **A serious body of engineering work deserves an interface that behaves like a living system.**
 
-The portfolio is therefore becoming an evolving digital environment where visitors can explore **who is building, what is being built, how it is engineered, and where the system is going next.**
+FeexSystems is evolving toward a personal digital headquarters where visitors can explore **who is building, what is being built, how systems connect, how they are engineered, and where the ecosystem is going next.**
 
 ---
 

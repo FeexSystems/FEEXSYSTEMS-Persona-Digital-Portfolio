@@ -47,22 +47,26 @@ export class ModelBackedIntelligence {
     this.model = model;
     this.memory = new NavigatorMemory();
     this.llmEndpoint = llmEndpoint;
-    this.telemetry = { status: 'IDLE', repositories: 0, documents: 0, lastSync: null, errors: 0 };
+    this.telemetry = { status: 'IDLE', repositories: 0, documents: 0, artifacts: 0, technologies: 0, lastSync: null, errors: 0 };
   }
 
   async ingest(onUpdate = () => {}) {
-    this.telemetry.status = 'SYNCING'; onUpdate(this.telemetry);
+    this.telemetry.status = 'SYNCING'; this.telemetry.repositories = 0; this.telemetry.documents = 0; this.telemetry.artifacts = 0; this.telemetry.technologies = 0; this.telemetry.errors = 0; onUpdate(this.telemetry);
     const results = await ingestRepositories(REPOSITORY_SEEDS, result => {
       if (result.error) this.telemetry.errors += 1;
       else {
         this.telemetry.repositories += 1;
         this.telemetry.documents += result.documents.length;
+        this.telemetry.artifacts += result.artifacts.length;
+        this.telemetry.technologies += result.technologies.length;
         const node = this.model.nodes.find(n => n.id === result.repository.id);
-        if (node) Object.assign(node, hydrateRepositoryNode(node, result.repository), { description: result.repository.description });
+        if (node) Object.assign(node, hydrateRepositoryNode(node, result.repository), { description: result.repository.description, languages:result.repository.languages });
+        const repoId = result.repository.id;
         result.technologies.forEach(t => {
           const id = `tech:${t.label.toLowerCase().replace(/[^a-z0-9]+/g,'-')}`;
-          if (!this.model.nodes.some(n => n.id === id)) this.model.nodes.push({ id, label: t.label, type:'TECHNOLOGY', versions:t.versions, evidence:t.evidence });
-          const repoId = result.repository.id;
+          const existing = this.model.nodes.find(n => n.id === id);
+          if (existing) Object.assign(existing, { versions:t.versions, evidence:t.evidence });
+          else this.model.nodes.push({ id, label: t.label, type:'TECHNOLOGY', versions:t.versions, evidence:t.evidence });
           if (!this.model.edges.some(e => e.source === repoId && e.target === id)) this.model.edges.push({ source: repoId, target: id, type:'USES' });
         });
         result.artifacts.forEach(a => {
@@ -71,11 +75,17 @@ export class ModelBackedIntelligence {
           if (!this.model.edges.some(e => e.source === repoId && e.target === id)) this.model.edges.push({ source: repoId, target: id, type:'PUBLISHED' });
         });
       }
-      onUpdate(this.telemetry);
+      onUpdate({ ...this.telemetry });
     });
     this.telemetry.status = 'ONLINE'; this.telemetry.lastSync = new Date().toISOString();
     saveWorldModel(this.model);
+    onUpdate({ ...this.telemetry });
     return results;
+  }
+
+  startTelemetry(intervalMs = 300000, onUpdate = () => {}) {
+    this.ingest(onUpdate).catch(() => {});
+    return setInterval(() => this.ingest(onUpdate).catch(() => {}), intervalMs);
   }
 
   toolContext(query) {

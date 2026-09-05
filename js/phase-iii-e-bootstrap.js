@@ -3,6 +3,10 @@ import { buildWorldModel } from './world-model.js';
 import { ModelBackedIntelligence } from './model-backed-intelligence.js';
 import { VoiceNavigator } from './voice-navigator.js';
 
+const style = document.createElement('style');
+style.textContent = `.model-telemetry{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(3,7,14,.82);backdrop-filter:blur(14px);font:700 8px Inter,system-ui;letter-spacing:.12em;color:#edf3ff;box-shadow:0 12px 35px rgba(0,0,0,.35)}.model-telemetry small{font:500 7px Inter;color:#8490a3;letter-spacing:.08em}.model-dot{width:6px;height:6px;border-radius:50%;background:#73f6b1;box-shadow:0 0 10px #73f6b1}.voice-nav-btn{border:1px solid rgba(255,255,255,.12);background:transparent;color:#edf3ff;border-radius:12px;padding:5px 7px;font:700 7px Inter;letter-spacing:.1em;cursor:pointer}.voice-nav-btn:hover{border-color:rgba(138,180,255,.5);background:rgba(138,180,255,.06)}`;
+document.head.appendChild(style);
+
 const model = buildWorldModel(PERSONA_REGISTRY);
 const intelligence = new ModelBackedIntelligence({ model, llmEndpoint: globalThis.FEEX_AI_ENDPOINT || '' });
 const input = document.querySelector('#navInput');

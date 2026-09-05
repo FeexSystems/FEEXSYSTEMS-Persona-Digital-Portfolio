@@ -41,7 +41,8 @@ create table if not exists world_model_embeddings (
   content text not null,
   embedding vector(1536),
   metadata jsonb not null default '{}'::jsonb,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  unique(entity_id, document_id, chunk_index)
 );
 
 create index if not exists world_model_entities_type_idx on world_model_entities(entity_type);

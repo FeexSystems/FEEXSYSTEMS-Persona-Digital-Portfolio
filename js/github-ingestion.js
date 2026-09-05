@@ -4,7 +4,7 @@
 const API = 'https://api.github.com';
 const TEXT_EXT = /\.(md|mdx|txt|js|jsx|ts|tsx|json|css|scss|html|yml|yaml|toml|py|go|rs|java|kt|swift|sql|sh|xml)$/i;
 const IGNORE = /(^|\/)(node_modules|dist|build|\.git|coverage|vendor|\.next)(\/|$)/i;
-const MAX_FILES = 80;
+const MAX_FILES = 40;
 const MAX_FILE_BYTES = 180_000;
 
 async function get(path) {
@@ -15,35 +15,24 @@ async function get(path) {
 
 export async function fetchRepository(owner, repo) {
   const metadata = await get(`/repos/${owner}/${repo}`);
-  const [languages, contents] = await Promise.all([
-    get(`/repos/${owner}/${repo}/languages`).catch(() => ({})),
-    get(`/repos/${owner}/${repo}/contents/${metadata.default_branch}`).catch(() => []),
-  ]);
-  return { metadata, languages, contents };
-}
-
-async function crawlTree(owner, repo, branch, path = '', depth = 0, out = []) {
-  if (out.length >= MAX_FILES || depth > 5) return out;
-  const entries = await get(`/repos/${owner}/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`).catch(() => []);
-  if (!Array.isArray(entries)) return out;
-  for (const entry of entries) {
-    if (out.length >= MAX_FILES || IGNORE.test(entry.path)) break;
-    if (entry.type === 'file' && TEXT_EXT.test(entry.name) && (entry.size ?? 0) <= MAX_FILE_BYTES) {
-      out.push({ path: entry.path, size: entry.size ?? 0, sha: entry.sha, download_url: entry.download_url });
-    } else if (entry.type === 'dir') {
-      await crawlTree(owner, repo, branch, entry.path, depth + 1, out);
-    }
-  }
-  return out;
+  const languages = await get(`/repos/${owner}/${repo}/languages`).catch(() => ({}));
+  return { metadata, languages };
 }
 
 export async function crawlRepository(owner, repo, branch) {
-  const files = await crawlTree(owner, repo, branch);
+  const tree = await get(`/repos/${owner}/${repo}/git/trees/${encodeURIComponent(branch)}?recursive=1`).catch(() => ({ tree:[] }));
+  const candidates = (tree.tree || [])
+    .filter(entry => entry.type === 'blob' && !IGNORE.test(entry.path) && TEXT_EXT.test(entry.path) && (entry.size ?? 0) <= MAX_FILE_BYTES)
+    .sort((a,b) => {
+      const rank = p => /(^|\/)(README\.md|package\.json|pnpm-lock\.yaml|yarn\.lock|package-lock\.json|vite\.config|tsconfig\.json|dockerfile|docker-compose)/i.test(p) ? 0 : /(^|\/)(src|app|components|lib|api|functions)\//i.test(p) ? 1 : 2;
+      return rank(a.path) - rank(b.path);
+    }).slice(0, MAX_FILES);
   const documents = [];
-  for (const file of files) {
+  for (const file of candidates) {
     try {
-      const text = await fetch(file.download_url).then(r => r.ok ? r.text() : '');
-      if (text) documents.push({ ...file, text: text.slice(0, MAX_FILE_BYTES) });
+      const raw = `https://raw.githubusercontent.com/${owner}/${repo}/${encodeURIComponent(branch)}/${file.path.split('/').map(encodeURIComponent).join('/')}`;
+      const text = await fetch(raw).then(r => r.ok ? r.text() : '');
+      if (text) documents.push({ path:file.path, size:file.size ?? 0, sha:file.sha, download_url:raw, text:text.slice(0, MAX_FILE_BYTES) });
     } catch {}
   }
   return documents;

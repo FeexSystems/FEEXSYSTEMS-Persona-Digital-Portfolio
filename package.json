@@ -1,18 +1,9 @@
 {
-  "name": "portfolio",
-  "version": "1.0.0",
-  "description": "Personal portfolio website",
-  "main": "index.html",
-  "scripts": {
-    "dev": "python -m http.server 8000",
-    "build": "echo \"Build script placeholder\"",
-    "test": "echo \"Test script placeholder\""
-  },
-  "keywords": [
-    "portfolio",
-    "personal",
-    "developer"
-  ],
-  "author": "FeexSystems",
-  "license": "MIT"
+  "name":"feexsystems-portfolio-os",
+  "version":"2.0.0",
+  "private":true,
+  "description":"FeexSystems interactive planetary portfolio OS",
+  "scripts":{"dev":"python -m http.server 8000","build":"echo \"Static portfolio OS — no build step required\"","test":"node --check js/main.js"},
+  "keywords":["portfolio","three.js","3d","ai","full-stack","feexsystems"],
+  "license":"MIT"
 }

@@ -3,12 +3,11 @@ import { IncrementalRepositoryIngestion } from './phase-iii-f-incremental-ingest
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const ingestion = new IncrementalRepositoryIngestion();
-
 globalThis.FEEX_INCREMENTAL_INGESTION = ingestion;
 
 async function sync() {
   await delay(1200);
-  const seeds = (PERSONA_REGISTRY || []).filter(world => world.repo).map(world => ({ url: world.repo, id: world.id }));
+  const seeds = (PERSONA_REGISTRY.worlds || []).filter(world => world.repo).map(world => ({ url: world.repo, id: world.id }));
   for (const seed of seeds) {
     try {
       const result = await ingestion.sync(seed);
@@ -22,3 +21,6 @@ async function sync() {
 
 sync();
 setInterval(sync, 300000);
+
+// The router is loaded here as part of the Phase III-F runtime bootstrap.
+import('./world-router.js').catch(error => console.error('World router failed to load:', error));

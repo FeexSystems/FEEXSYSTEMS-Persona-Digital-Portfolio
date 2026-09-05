@@ -1,6 +1,6 @@
 # FEEXSYSTEMS — Persona Digital Operating Environment
 
-> **An interactive digital operating environment for exploring a builder, their systems, capabilities, projects, and evolving body of work.**
+> **An interactive digital operating environment for exploring a builder, their systems, capabilities, projects, artifacts, technologies, and evolving body of work.**
 
 [![Portfolio OS](https://img.shields.io/badge/FEEXSYSTEMS-PERSONA%20OS-02040a?style=flat-square)](https://github.com/FeexSystems/portfolio)
 [![WebGL](https://img.shields.io/badge/WebGL-3D-8ab4ff?style=flat-square)](https://threejs.org/)
@@ -8,48 +8,222 @@
 
 ## 01 — What This Is
 
-FeexSystems Portfolio OS is an interactive **persona digital operating environment** rather than a conventional portfolio. Projects, capabilities and artifacts are modeled as connected worlds and nodes in a navigable knowledge graph.
+FeexSystems Portfolio OS is an interactive **persona digital operating environment**, not a conventional portfolio. The experience models work as a connected world: projects become worlds, technologies become nodes, artifacts become evidence, repositories become implementation sources, and timelines provide evolution.
 
 ```text
-PERSONA → DIGITAL TWIN → KNOWLEDGE GRAPH → AI NAVIGATOR → 3D WORLD
+PERSONA → DIGITAL TWIN → WORLD MODEL → KNOWLEDGE GRAPH → AI NAVIGATOR → 3D WORLD
 ```
 
-## 02 — Phase III-C: Graph + Navigator
+## 02 — Intelligent World Model
 
-The planetary core now visualizes the underlying graph directly:
+**Phase III-D is now active.** The static Persona Registry is no longer the only semantic source. A new World Model layer builds a normalized graph of:
 
-- **World nodes** orbit the planetary core.
-- **Capability nodes** form a secondary constellation.
-- **Connection arcs** encode world → capability relationships.
-- **Focus mode** dims unrelated nodes and emphasizes the selected neighborhood.
-- **Camera zoom** moves closer to the active graph neighborhood.
-- **Pointer interaction** selects world nodes directly on the planet.
-- **Animated rings and node pulses** provide live system telemetry.
-- **World transitions** synchronize graph focus, Digital Twin state and system cards.
+- **Persona entities** — the builder and identity layer.
+- **World entities** — products, systems and projects.
+- **Repository entities** — implementation sources associated with worlds.
+- **Artifact entities** — case studies, interfaces, specifications and technical outputs.
+- **Technology entities** — frameworks, runtimes, protocols and infrastructure.
+- **Capability entities** — domains of engineering competence.
+- **Timeline entities** — phases and evolution of the ecosystem.
+- **Relationship edges** — ownership, implementation, usage, dependency, evolution and temporal relationships.
 
-### Knowledge Graph
-
-The graph is generated from the Persona Registry rather than hard-coded into the renderer.
+### World Model schema
 
 ```text
-                         PERSONA CORE
-                              │
-            ┌─────────────────┼─────────────────┐
-            │                 │                 │
-          WORLDS         CAPABILITIES       RELATIONS
-            │                 │                 │
-     ┌──────┼──────┐          │          WORLD → CAPABILITY
-     ▼      ▼      ▼          ▼
-    3WM   HOLOKAI YURRHEELER  AI / ML
-     │      │       │         FINTECH
-     └──────┼───────┼──────── DATA
-            ▼       ▼
-       KAPPAXCHANGEFIN
-            │
-        PAYMENTS / FINTECH
+ENTITY TYPES
+────────────────────────────────────────────
+PERSONA
+WORLD
+REPOSITORY
+ARTIFACT
+TECHNOLOGY
+CAPABILITY
+TIMELINE
+EVENT
+
+EDGE TYPES
+────────────────────────────────────────────
+OWNS
+IMPLEMENTS
+USES
+DEPENDS_ON
+RELATED_TO
+EVOLVED_FROM
+PUBLISHED
+OCCURRED_AT
 ```
 
-## 03 — System Worlds
+The model is deliberately **local-first and provider-neutral**. It can be hydrated from GitHub or another source without coupling the rendering layer to an external service.
+
+### Repository-aware architecture
+
+```text
+                  INTELLIGENT WORLD MODEL
+                           │
+       ┌───────────────────┼───────────────────┐
+       ▼                   ▼                   ▼
+   PERSONA              WORLDS            REPOSITORIES
+       │                   │                   │
+       │                   ├──────────────┐    │
+       │                   ▼              ▼    │
+       │              ARTIFACTS      TECHNOLOGIES
+       │                   │              │
+       └───────────────────┼──────────────┘
+                           ▼
+                     CAPABILITIES
+                           │
+                           ▼
+                       TIMELINE
+```
+
+Repository seed metadata is maintained separately from presentation data so a future GitHub ingestion adapter can replace seed values with live repository telemetry.
+
+## 03 — Graph Paths
+
+The World Model includes graph traversal rather than simple keyword matching. `graphPath()` performs a breadth-first relationship traversal between entities.
+
+Example:
+
+```text
+KAPPAXCHANGEFIN
+      │
+      ▼
+ISO 20022 ARTIFACT
+      │
+      ▼
+ISO 20022 TECHNOLOGY
+```
+
+This allows the Navigator to answer relationship-oriented queries such as:
+
+```text
+“What connects KappaXchangefin and ISO 20022?”
+“Find the path between two systems.”
+“What technologies support this artifact?”
+“What repositories implement this world?”
+```
+
+## 04 — AI Navigator 2.0
+
+The Navigator has evolved from a Persona keyword search into a **World Model graph agent**.
+
+Current resolution pipeline:
+
+```text
+USER QUERY
+    ↓
+NORMALIZE / TOKENIZE
+    ↓
+WORLD MODEL ENTITY SEARCH
+    ↓
+SEMANTIC MATCH
+    ↓
+NEIGHBOR EXPANSION
+    ↓
+RELATIONSHIP / PATH RESOLUTION
+    ↓
+CONTEXT RESPONSE
+    ↓
+SPATIAL WORLD NAVIGATION
+```
+
+It can now reason over:
+
+- worlds
+- repositories
+- artifacts
+- technologies
+- capabilities
+- timelines
+- graph relationships
+- connected entities
+- graph statistics
+
+### Example interactions
+
+```text
+“Show me fintech systems.”
+→ KappaXchangefin
+
+“What technologies are used by the Persona OS?”
+→ Three.js / WebGL / JavaScript / Knowledge Graph
+
+“Show repositories.”
+→ Repository entities
+
+“What connects the planetary graph and AI Navigator?”
+→ Relationship/path resolution
+
+“How many technologies are modeled?”
+→ World Model statistics
+```
+
+## 05 — Embeddings Architecture
+
+The current implementation uses deterministic local matching. The graph contract is prepared for an embedding retrieval layer without requiring a rewrite of the Navigator.
+
+Target architecture:
+
+```text
+ENTITY / ARTIFACT
+       ↓
+TEXT REPRESENTATION
+       ↓
+EMBEDDING MODEL
+       ↓
+VECTOR INDEX
+       ↓
+TOP-K RETRIEVAL
+       ↓
+GRAPH EXPANSION
+       ↓
+RERANK / CONTEXT
+       ↓
+CONVERSATIONAL NAVIGATOR
+```
+
+The recommended production implementation is to store vectors separately from canonical graph entities. PostgreSQL + pgvector is a natural future adapter, while the browser remains a presentation/client layer.
+
+## 06 — Repository Intelligence Roadmap
+
+The repository-aware model currently provides **seeded repository entities**. The next ingestion adapter should retrieve live metadata such as:
+
+- repository description
+- default branch
+- stars
+- forks
+- open issues
+- last update
+- language statistics
+- releases
+- contributors
+- directory structure
+- README sections
+- source files
+- detected technologies
+- architecture patterns
+
+The resulting pipeline becomes:
+
+```text
+GITHUB
+  ↓
+REPOSITORY INGESTOR
+  ↓
+NORMALIZER
+  ↓
+ENTITY EXTRACTOR
+  ↓
+TECH / ARTIFACT DETECTOR
+  ↓
+GRAPH BUILDER
+  ↓
+EMBEDDING INDEX
+  ↓
+WORLD MODEL
+```
+
+## 07 — System Worlds
 
 - **3WM SONIK LABS** — AI-native audio / DSP
 - **HoloKai** — cultural intelligence / world models / 3D
@@ -60,76 +234,52 @@ The graph is generated from the Persona Registry rather than hard-coded into the
 
 OjaChat has been removed from the active Persona OS world registry and replaced by **KappaXchangefin**.
 
-## 04 — AI Navigator
+## 08 — Planetary World Model Visualization
 
-The Navigator currently operates against the local Knowledge Graph and can resolve natural-language intent into connected worlds.
-
-Example queries:
+The 3D planetary core is now a graph viewport.
 
 ```text
-“Show me the fintech systems.”
-“Which worlds use AI?”
-“Find projects related to payments.”
-“How many worlds are connected?”
+                       PERSONA CORE
+                            │
+                  ┌─────────┴─────────┐
+                  │                   │
+               WORLD NODES       CAPABILITY NODES
+                  │                   │
+                  └─────────┬─────────┘
+                            │
+                     CONNECTION ARCS
+                            │
+                      GRAPH FOCUS
+                            │
+                      CAMERA ZOOM
+                            │
+                    WORLD TRANSITION
 ```
 
-Resolution pipeline:
+Interaction states:
+
+**Ecosystem view** — all graph entities are visible.
+
+**World focus** — the selected world and its immediate neighborhood become dominant.
+
+**Relationship view** — graph edges become the primary visual signal.
+
+**Spatial transition** — selecting an entity moves the Digital Twin and planetary camera toward that world.
+
+## 09 — Digital Twin
+
+The Digital Twin remains the runtime state layer above the World Model:
 
 ```text
-USER QUERY
-   ↓
-INTENT / KEYWORD RESOLUTION
-   ↓
-KNOWLEDGE GRAPH SEARCH
-   ↓
-WORLD + CAPABILITY MATCH
-   ↓
-CONTEXT RESPONSE
-   ↓
-SPATIAL NAVIGATION
-   ↓
-DIGITAL TWIN FOCUS
+WORLD MODEL = WHAT EXISTS
+DIGITAL TWIN = CURRENT STATE
+NAVIGATOR = HOW WE QUERY IT
+PLANETARY ENGINE = HOW WE EXPERIENCE IT
 ```
 
-The architecture is intentionally provider-neutral. A future model-backed layer can replace or augment the local resolver without changing the graph or rendering contract.
+The Twin persists local session information including presence, focus, visited worlds and recent history.
 
-## 05 — Interaction Model
-
-### Focus
-
-Selecting a world activates its graph neighborhood. Connected capability nodes remain emphasized while unrelated nodes recede.
-
-### Zoom
-
-Mouse wheel / trackpad input changes the planetary camera distance, allowing the visitor to move from ecosystem-level context toward an active world.
-
-### Spatial selection
-
-World nodes are raycast targets in the Three.js scene. Selecting one updates:
-
-1. Digital Twin focus
-2. Graph focus
-3. Camera zoom
-4. System-card selection
-5. World navigation state
-
-### World transition
-
-```text
-CLICK / AI RESULT
-       ↓
-WORLD ID
-       ↓
-PERSONA TWIN ENTER
-       ↓
-GRAPH FOCUS
-       ↓
-CAMERA ZOOM
-       ↓
-SYSTEM WORLD HIGHLIGHT
-```
-
-## 06 — Architecture
+## 10 — Architecture
 
 ```text
 Browser
@@ -140,24 +290,37 @@ Browser
   └── ES Modules
         │
         ├── persona-registry.js
-        │      └── worlds / capabilities / relations
+        │      └── canonical Persona seed data
+        │
+        ├── world-model.js
+        │      ├── entity schema
+        │      ├── repository seeds
+        │      ├── artifact seeds
+        │      ├── technology nodes
+        │      ├── timeline
+        │      ├── graph edges
+        │      └── graph traversal
         │
         ├── digital-twin.js
         │      └── presence / focus / session state
         │
         ├── ai-navigator.js
-        │      └── graph-aware semantic resolver
+        │      ├── entity matching
+        │      ├── neighborhood expansion
+        │      ├── relationship queries
+        │      ├── graph statistics
+        │      └── path resolution
         │
         └── main.js
                ├── Three.js planetary renderer
                ├── graph nodes
-               ├── connection arcs
+               ├── relationship arcs
                ├── focus / zoom controller
                ├── raycast interaction
                └── world transition bus
 ```
 
-## 07 — Roadmap
+## 11 — Phase Status
 
 ### Phase I — Planetary Foundation
 
@@ -195,19 +358,59 @@ Browser
 
 ### Phase III-D — Intelligent World Model
 
-- [ ] Graph database persistence
-- [ ] Repository-aware project nodes
-- [ ] Artifact nodes and case studies
-- [ ] Technology/version nodes
-- [ ] Timeline edges
-- [ ] GitHub telemetry ingestion
-- [ ] Embedding-based retrieval
+- [x] World Model schema
+- [x] Repository entity layer
+- [x] Artifact entity layer
+- [x] Technology entity layer
+- [x] Capability entity layer
+- [x] Timeline entity layer
+- [x] Typed relationship edges
+- [x] Graph traversal / paths
+- [x] World Model-aware Navigator
+- [x] Neighbor expansion
+- [x] Local model persistence
+- [ ] Live GitHub repository ingestion
+- [ ] Source-code entity extraction
+- [ ] Technology/version detection
+- [ ] Artifact auto-discovery
+- [ ] Embedding index
+- [ ] pgvector retrieval
 - [ ] Model-backed conversational reasoning
-- [ ] Multi-turn Navigator memory
+- [ ] Multi-turn graph memory
 - [ ] Explainable relationship paths
 - [ ] Voice Navigator
 
-### Phase IV — FEEX WORLD
+## 12 — Phase III-E: Model-Backed Intelligence
+
+The next intelligence layer should sit behind an explicit provider adapter:
+
+```text
+                    AI NAVIGATOR
+                         │
+                  INTENT ROUTER
+                         │
+          ┌──────────────┼──────────────┐
+          ▼              ▼              ▼
+       GRAPH          VECTOR          MEMORY
+       SEARCH        RETRIEVAL         STORE
+          │              │              │
+          └──────────────┼──────────────┘
+                         ▼
+                    LLM ADAPTER
+                         │
+                    TOOL / GRAPH
+                    INTERPRETATION
+                         │
+                         ▼
+                   GROUNDED ANSWER
+                         │
+                         ▼
+                  SPATIAL COMMAND
+```
+
+The model should never be the source of truth for portfolio facts. Canonical facts come from the World Model; the model interprets, summarizes, plans and navigates those facts.
+
+## 13 — FEEX WORLD
 
 ```text
                          PERSONA
@@ -222,8 +425,11 @@ Browser
           ▼                 ▼                 ▼
        WORLDS          CAPABILITIES       ARTIFACTS
           │                 │                 │
+       REPOS          TECHNOLOGIES       TIMELINES
           └─────────────────┼─────────────────┘
                             ▼
+                      VECTOR MEMORY
+                            │
                        AI NAVIGATOR
                             │
                      COMMAND BUS / API
@@ -233,7 +439,7 @@ Browser
                        PLANETARY UI
 ```
 
-## 08 — Development
+## 14 — Development
 
 The current foundation can run as a static site:
 
@@ -249,25 +455,29 @@ http://localhost:8000
 
 Three.js is currently loaded as an ES module from a CDN.
 
-## 09 — Design Principles
+## 15 — Design Principles
 
 **World, not page** — major capabilities should feel like locations inside a larger digital environment.
 
+**Graph, not list** — relationships are first-class information.
+
 **State, not static content** — navigation changes the Digital Twin and spatial presentation.
+
+**Evidence, not claims** — repositories and artifacts become traceable implementation evidence.
 
 **Spatial meaning** — 3D geometry communicates relationships rather than serving only as decoration.
 
-**Progressive disclosure** — ecosystem → world → capability → artifact → architecture.
+**Progressive disclosure** — ecosystem → world → repository → technology → artifact → architecture.
 
-**Technical transparency** — the environment demonstrates systems thinking and architecture.
+**Canonical data + model reasoning** — the World Model remains authoritative while AI interprets and navigates it.
 
 **Human + machine** — the human builder is represented by the Persona layer; AI becomes the navigation interface to the body of work.
 
-## 10 — Vision
+## 16 — Vision
 
 > **A serious body of engineering work deserves an interface that behaves like a living system.**
 
-FeexSystems is evolving toward a personal digital headquarters where visitors can explore **who is building, what is being built, how systems connect, how they are engineered, and where the ecosystem is going next.**
+FeexSystems is evolving toward a personal digital headquarters where visitors can explore **who is building, what is being built, how systems connect, where the implementation lives, which technologies are involved, how the ecosystem evolved, and where it is going next.**
 
 ---
 

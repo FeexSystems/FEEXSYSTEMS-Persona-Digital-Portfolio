@@ -1,159 +1,292 @@
-# FeexSystems Portfolio
+# FEEXSYSTEMS — Persona Digital Operating Environment
 
-Personal portfolio website showcasing projects, skills, and experience in full-stack development, AI/ML integration, and innovative software solutions.
+> **An interactive digital operating environment for exploring a builder, their systems, capabilities, projects, and evolving body of work.**
 
-## 🚀 Quick Overview
+[![Portfolio OS](https://img.shields.io/badge/FEEXSYSTEMS-PERSONA%20OS-02040a?style=flat-square)](https://github.com/FeexSystems/portfolio)
+[![WebGL](https://img.shields.io/badge/WebGL-3D-8ab4ff?style=flat-square)](https://threejs.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES%20Modules-f7df1e?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-Welcome to my portfolio! I'm a passionate full-stack developer specializing in:
-- **Full-Stack Web Development** (TypeScript, JavaScript, Python, Kotlin)
-- **AI/ML Integration** (LLMs, RAG, AI Agents)
-- **Content & Chat Platforms**
-- **Audio & Media Technologies**
-- **Real Estate & E-Commerce Solutions**
+## 01 — What This Is
 
-## 📁 Repository Structure
+FeexSystems Portfolio OS is no longer designed as a conventional portfolio page. It is being evolved into an **interactive persona digital operating environment**: a navigable interface representing the builder as a connected ecosystem of identity, projects, technologies, experiments, and digital worlds.
 
+The interface treats a portfolio as a **world model**, not a document.
+
+```text
+PERSONA
+   ↓
+WORLD MODEL
+   ↓
+SYSTEMS / WORLDS
+   ↓
+PROJECTS / ARTIFACTS
+   ↓
+CAPABILITIES / TECHNOLOGY
+   ↓
+ACTIVITY / SIGNALS
+   ↓
+COMMAND CENTER
 ```
+
+## 02 — Experience Model
+
+The environment is organized around six layers:
+
+| Layer | Purpose |
+|---|---|
+| **Persona** | Identity, philosophy, presence, availability and narrative |
+| **World Model** | The 3D planetary representation of the portfolio ecosystem |
+| **Systems** | Major products, platforms and engineering worlds |
+| **Capabilities** | AI, full-stack, infrastructure, data, security and creative technology |
+| **Artifacts** | Case studies, repositories, experiments, media and technical work |
+| **Command Center** | Search, navigation, system state and future AI-assisted interaction |
+
+## 03 — Current Interface
+
+### Planetary Core
+
+The home environment presents a WebGL planetary core with:
+
+- Procedural star field
+- Atmospheric rendering
+- Orbital geometry
+- Pointer-responsive camera/planet motion
+- Interactive hotspots
+- Ambient visual telemetry
+- Responsive mobile scaling
+
+### System Worlds
+
+Selected projects are presented as worlds inside the ecosystem:
+
+- **3WM SONIK LABS** — AI-native audio / DSP
+- **HoloKai** — cultural intelligence / world models / 3D
+- **Yurrheeler AI** — multi-agent healthcare intelligence
+- **OjaChat** — conversational commerce / vector systems
+- **VYRA LABS** — conversational interfaces / intelligent media
+- **Rental Paradise** — property discovery / digital commerce
+
+### Capability Constellation
+
+The engineering substrate is represented as a connected constellation:
+
+`AI/ML · FULL-STACK · INFRA · DATA · CREATIVE TECH · SECURITY`
+
+## 04 — Persona OS Roadmap
+
+### Phase I — Planetary Foundation
+
+- [x] Planetary visual identity
+- [x] WebGL globe
+- [x] Orbital system
+- [x] Star field
+- [x] System-world cards
+- [x] Capability constellation
+- [x] Boot sequence
+- [x] Ambient interaction
+- [x] Responsive experience
+
+### Phase II — Interactive Persona OS
+
+- [ ] Persistent persona state
+- [ ] Command palette
+- [ ] Keyboard-first navigation
+- [ ] System/world selection state
+- [ ] Planetary camera transitions
+- [ ] Interactive project planets
+- [ ] Project detail portals
+- [ ] Timeline / activity layer
+- [ ] Live GitHub telemetry
+- [ ] Searchable knowledge graph
+- [ ] Persona profile layer
+- [ ] Availability / engagement state
+
+### Phase III — Digital Twin Interface
+
+- [ ] AI portfolio navigator
+- [ ] Natural-language command layer
+- [ ] Semantic project search
+- [ ] Dynamic knowledge graph
+- [ ] Context-aware project recommendations
+- [ ] Voice interaction
+- [ ] Persona memory architecture
+- [ ] Real-time system activity visualization
+- [ ] Interactive 3D environments
+- [ ] Persistent user session state
+
+### Phase IV — FEEX WORLD
+
+```text
+                 ┌─────────────────┐
+                 │     PERSONA     │
+                 └────────┬────────┘
+                          │
+              ┌───────────▼───────────┐
+              │      WORLD MODEL      │
+              └───────────┬───────────┘
+                          │
+       ┌──────────────────┼──────────────────┐
+       ▼                  ▼                  ▼
+   SYSTEM WORLDS      CAPABILITY         ARTIFACTS
+       │              CONSTELLATION          │
+       └──────────────────┬──────────────────┘
+                          ▼
+                 ┌─────────────────┐
+                 │ COMMAND CENTER  │
+                 └────────┬────────┘
+                          ▼
+                    AI NAVIGATOR
+```
+
+The long-term objective is an interface that feels closer to a **personal digital headquarters** than a website.
+
+## 05 — Technical Architecture
+
+The current implementation intentionally remains lightweight while the experience is being proven.
+
+```text
+Browser
+  │
+  ├── HTML semantic shell
+  ├── CSS visual system
+  └── ES Modules
+        │
+        └── Three.js WebGL engine
+              ├── Planetary scene
+              ├── Atmosphere
+              ├── Stars
+              ├── Lighting
+              └── Interaction loop
+```
+
+Planned evolution:
+
+```text
+React / TypeScript UI
+        │
+        ├── Persona State
+        ├── World Model
+        ├── Command Bus
+        ├── Knowledge Graph
+        ├── Project Registry
+        ├── Activity Stream
+        └── AI Navigator
+                 │
+              WebGL / 3D
+                 │
+          Planetary Experience
+```
+
+## 06 — Repository Structure
+
+```text
 portfolio/
-├── index.html              # Main portfolio website
+├── index.html
 ├── styles/
-│   └── main.css           # Styling and responsive design
+│   └── main.css
 ├── js/
-│   └── main.js            # Interactive features and animations
+│   └── main.js
 ├── resume/
-│   └── CV.md              # Detailed professional resume
+│   └── CV.md
 ├── blog/
-│   └── README.md          # Blog section (coming soon)
-├── package.json           # Project metadata
-└── README.md              # This file
+│   └── README.md
+├── package.json
+└── README.md
 ```
 
-## ✨ Pinned Featured Projects
+The structure will evolve toward a componentized application as the Persona OS moves into its next engineering phase.
 
-### 🎵 3WM SONIK LABS
-Revolutionary audio production platform built for African producers and the next generation of music creators.
-- **Tech:** TypeScript, Audio APIs
-- **Description:** ONE VISION. THREE MINDS. INFINITE SOUND. BUILT FOR THE SOUND OF AFRICA.
-- **Repository:** [View Project](https://github.com/FeexSystems/3WM-SONIK-LABS)
+## 07 — Design Principles
 
-### 🏛️ HoloKai Systems
-Cultural heritage preservation platform - "Where Civilizations Remember"
-- **Tech:** JavaScript, Full-Stack
-- **Description:** Platform designed to preserve and share cultural heritage through innovative technology
-- **Repository:** [View Project](https://github.com/FeexSystems/HoloKai-Systems-Labs)
+### World, not page
 
-### 💬 VYRA LABS
-Chat-first interface content platform
-- **Tech:** Kotlin, Chat Interface, AI
-- **Description:** Experience the future of content interaction through conversational AI and intelligent communication systems
-- **Repository:** [View Project](https://github.com/FeexSystems/VYRA-LABS)
+Every major capability should feel like a location or system inside a larger digital world.
 
-### 🏠 Rental Paradise
-Premium property rental platform
-- **Tech:** TypeScript, React
-- **Description:** Discover, explore, and book your perfect vacation or long-term rental with modern web technologies
-- **Repository:** [View Project](https://github.com/FeexSystems/Rental-Paradise)
+### State, not static content
 
-### 💬 Gemini CLI
-Open-source AI agent bringing Google Gemini directly to your terminal
-- **Tech:** TypeScript, AI/APIs, CLI
-- **Description:** Streamlined AI interactions for developers building intelligent CLI tools
-- **Repository:** [View Project](https://github.com/FeexSystems/gemini-cli)
+The environment should react to navigation, selection, activity, availability and user intent.
 
-### 💼 Portfolio
-Personal portfolio website
-- **Tech:** HTML5/CSS3, JavaScript, Responsive Design
-- **Description:** A clean, responsive design highlighting my journey as a full-stack developer and innovator
-- **Repository:** [View Project](https://github.com/FeexSystems/portfolio)
+### Spatial navigation
 
-## 🛠️ Technology Stack
+3D space should communicate relationships rather than exist purely as decoration.
 
-### Languages
-- JavaScript / TypeScript
-- Python
-- Java
-- Kotlin
-- SQL
+### Progressive disclosure
 
-### Frontend
-- React
-- Vue.js
-- HTML5 / CSS3
-- Responsive Design
+The interface exposes complexity gradually: overview → world → system → artifact → architecture.
 
-### Backend
-- Node.js / Express
-- Python (Django, Flask)
-- REST APIs
-- GraphQL
+### Technical transparency
 
-### AI/ML
-- LLM Integration
-- RAG Systems
-- AI Agents
-- Gemini API
+The portfolio should demonstrate how systems are engineered, not merely show screenshots of finished products.
 
-### Tools & Platforms
-- Git / GitHub
-- Docker
-- MongoDB / PostgreSQL
-- Firebase / AWS
-- CI/CD Pipelines
+### Human + machine
 
-## 🎯 My Approach
+The persona layer represents the human builder; the AI layer becomes an interface for navigating the body of work.
 
-- **Clean Code:** Writing maintainable, well-documented code following best practices
-- **Scalability:** Designing systems that grow with your needs
-- **Innovation:** Staying current with emerging technologies
-- **Quality:** Rigorous testing and performance optimization
-- **Collaboration:** Working effectively with teams and communities
+## 08 — Local Development
 
-## 🌐 Visit the Portfolio
-
-Open `index.html` in your browser to see the interactive portfolio website.
-
-### Running Locally
+The current foundation can run as a static site.
 
 ```bash
-# Using Python's built-in server
-npm run dev
-# or
 python -m http.server 8000
-
-# Then visit http://localhost:8000
 ```
 
-## 📝 Resume
+Then open:
 
-For detailed professional information, see [resume/CV.md](resume/CV.md)
+```text
+http://localhost:8000
+```
 
-## 📚 Blog
+The planetary renderer loads Three.js as an ES module from a CDN.
 
-Check out the [blog section](blog/README.md) for upcoming articles about:
-- Full-Stack Development Best Practices
-- AI/ML Integration Techniques
-- Building Scalable Applications
-- Web Performance Optimization
-- Career Tips for Developers
+## 09 — Featured Systems
 
-## 🔗 Connect With Me
+### 3WM SONIK LABS
 
-- **GitHub:** [@FeexSystems](https://github.com/FeexSystems)
-- **Email:** contact@feexsystems.com
-- **All Projects:** Visit my GitHub profile for 30+ additional projects
+AI-native audio production infrastructure focused on creative tooling, DSP and intelligent music workflows.
 
-## 📊 Repository Statistics
+**Repository:** https://github.com/FeexSystems/3WM-SONIK-LABS
 
-- **Primary Languages:** HTML (43.7%), CSS (40.4%), JavaScript (15.9%)
-- **Total Repositories:** 30+
-- **Active Projects:** Continuously building and innovating
+### HoloKai Systems
 
-## 📄 License
+A digital civilization intelligence concept focused on preserving, indexing and experiencing cultural heritage.
 
-This portfolio is open source and available under the MIT License.
+**Repository:** https://github.com/FeexSystems/HoloKai-Systems-Labs
+
+### Yurrheeler AI
+
+A multi-agent healthcare intelligence interface built around coordinated expert reasoning.
+
+**Repository:** https://github.com/FeexSystems/yurrhealer-med-advisor
+
+### OjaChat
+
+Conversational commerce infrastructure connecting users, products and intelligent recommendations.
+
+**Repository:** https://github.com/FeexSystems/OjaChat
+
+### VYRA LABS
+
+A chat-first interface experiment for intelligent content and communication.
+
+**Repository:** https://github.com/FeexSystems/VYRA-LABS
+
+### Rental Paradise
+
+A modern property discovery and rental experience.
+
+**Repository:** https://github.com/FeexSystems/Rental-Paradise
+
+## 10 — Vision
+
+FeexSystems is being built around a simple premise:
+
+> **A serious body of engineering work deserves an interface that behaves like a living system.**
+
+The portfolio is therefore becoming an evolving digital environment where visitors can explore **who is building, what is being built, how it is engineered, and where the system is going next.**
 
 ---
 
-**Building the future, one line of code at a time.** 🚀
+**FEEXSYSTEMS / PERSONA DIGITAL OPERATING ENVIRONMENT**  
+**Building digital worlds, one system at a time.**
 
-Last Updated: September 2026
+_Last updated: September 2026_

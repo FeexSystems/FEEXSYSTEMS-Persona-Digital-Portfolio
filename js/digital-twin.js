@@ -30,3 +30,6 @@ export function createTwinCommand(twin) {
     return { type:'search', payload:null };
   };
 }
+
+// Functional world navigation is loaded as a side-effect after the Digital Twin module.
+if (typeof document !== 'undefined') import('./world-router.js').catch(error => console.error('World router failed to load:', error));

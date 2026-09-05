@@ -1,172 +1,124 @@
-# FeexSystems Blog
+# FEEXSYSTEMS Knowledge Journal
 
-Insights, tutorials, and reflections on web development, AI integration, best practices, and technology trends.
+> **Engineering notes from the Persona Digital Operating Environment — where systems, repositories, artifacts, technologies and ideas are documented as one connected body of work.**
 
-## 📌 Featured Articles (Coming Soon!)
+## Editorial architecture
 
-I'm actively working on in-depth articles covering:
+The blog is the narrative layer of the FEEXSYSTEMS World Model.
 
-### 🚀 Getting Started with Modern JavaScript & TypeScript
-- Setup and best practices
-- ES6+ features and TypeScript advantages
-- Building your first TypeScript project
-
-### 🤖 Integrating AI/LLMs into Your Applications
-- Overview of Large Language Models (LLMs)
-- Building with Gemini API
-- Implementing RAG (Retrieval-Augmented Generation)
-- Creating AI Agents
-
-### 🏗️ Building Scalable Web Applications
-- Architecture patterns for growth
-- Microservices vs Monolithic
-- Database optimization
-- Caching strategies
-
-### ⚡ Web Performance Optimization
-- Frontend performance tuning
-- Backend optimization techniques
-- Database query optimization
-- Monitoring and metrics
-
-### 💻 Full-Stack Development Best Practices
-- Project structure and organization
-- API design principles
-- Testing strategies
-- Deployment and CI/CD
-
-### 🎨 Modern UI/UX Development
-- Building responsive interfaces
-- Component-driven architecture
-- Accessibility best practices
-- Performance in UI frameworks
-
-### 🔐 Security in Web Development
-- Secure coding practices
-- Authentication & Authorization
-- API security
-- Data protection
-
-### 📱 Desktop & Mobile Development
-- Cross-platform development
-- Building with Electron
-- Mobile-first design
-- Progressive Web Apps (PWAs)
-
-### 🎵 Audio Processing in Web Applications
-- Web Audio API
-- Working with audio files
-- Real-time audio processing
-- Building music production tools
-
-### 💡 Career Tips for Developers
-- Continuous learning strategies
-- Networking and growth
-- Side projects and portfolio building
-- Remote work best practices
-
----
-
-## 📝 Blog Post Template
-
-When creating a new blog post, use the following format:
-
-```markdown
-# Blog Post Title
-
-**Published:** [Date]  
-**Reading Time:** [X] min read  
-**Topics:** [Topic1, Topic2, Topic3]
-
-## Introduction
-
-Your compelling introduction that hooks the reader and explains what they'll learn...
-
-## Key Concept 1
-
-Deep dive into the first main topic with code examples, explanations, and insights.
-
-```javascript
-// Code example with syntax highlighting
-const example = () => {
-    console.log('Hello World');
-};
+```text
+WORLD MODEL
+    ↓
+EVIDENCE
+    ↓
+ARCHITECTURE
+    ↓
+IMPLEMENTATION
+    ↓
+ENGINEERING JOURNAL
 ```
 
-## Key Concept 2
+The blog explains the systems. It does not replace canonical World Model data.
 
-Continue with additional concepts, building on previous knowledge.
+## Current articles
 
-## Best Practices
+### Persona OS
 
-Actionable tips and recommendations based on real-world experience.
+- `01-persona-digital-operating-environment.md` — From Portfolio to Persona Digital Operating Environment
 
-## Common Pitfalls
+### Intelligent World Model
 
-What to avoid and lessons learned from experience.
+- `02-intelligent-world-model.md` — The Intelligent World Model: Turning a Portfolio into a Knowledge Graph
 
-## Conclusion
+### Model-Backed Intelligence
 
-Summarize key takeaways and suggest next steps for the reader.
+- `03-model-backed-intelligence.md` — Model-Backed Intelligence: Why the LLM Must Not Become the World Model
+
+### Repository Intelligence
+
+- `04-repository-intelligence.md` — Repository Intelligence: When the Source Becomes Evidence
+
+## Editorial roadmap
+
+### The Persona OS
+
+1. Why a portfolio became a digital operating environment
+2. Designing the Persona Digital Twin
+3. Building the planetary interface
+4. Spatial navigation as information architecture
+
+### Intelligent World Model
+
+5. From static registry to semantic world model
+6. Typed entities and graph relationships
+7. Explainable graph paths
+8. Repository-aware portfolio intelligence
+
+### Phase III-E
+
+9. Why the LLM must not become the World Model
+10. Grounding an AI Navigator with graph tools
+11. Hybrid semantic + graph retrieval
+12. PostgreSQL and pgvector
+13. Multi-turn Navigator memory
+14. Provider-neutral model adapters
+
+### Repository Intelligence
+
+15. Live GitHub ingestion
+16. README and source-tree crawling
+17. Technology and version extraction
+18. Artifact discovery
+19. Repository telemetry and change detection
+
+### System Worlds
+
+20. 3WM SONIK LABS — AI-native audio systems
+21. HoloKai — civilization intelligence and world models
+22. Yurrheeler AI — coordinated multi-agent intelligence
+23. KappaXchangefin — financial infrastructure and ISO 20022
+24. VYRA LABS — conversational interfaces
+25. Rental Paradise — property discovery and digital commerce
+
+## Content standard
+
+Every technical article should cover, where applicable:
+
+- Problem
+- Context
+- Architecture
+- Implementation
+- Evidence
+- Trade-offs
+- Failure modes
+- Security considerations
+- World Model relationships
+- Next iteration
+
+## Evidence standard
+
+Use explicit status labels:
+
+- **Implemented** — present in the repository
+- **Prototype** — working experimental implementation
+- **Planned** — intended future work
+- **Experimental** — exploratory work without production guarantees
+
+Do not manufacture metrics, customers, credentials, benchmarks or production claims.
+
+## Related portfolio surfaces
+
+- Main Persona OS: `../index.html`
+- Canonical project index: `../projects/00-world-index.md`
+- Professional resume: `../resume/CV.md`
+
+## Writing direction
+
+The voice should be technical, precise, systems-oriented and evidence-led. Articles should explain decisions, not merely announce features.
 
 ---
 
-**Have questions or suggestions?**  
-- Comment in the discussion section
-- Open an issue on GitHub
-- Reach out on social media
-
----
-
-*Last Updated: [Date]*
-```
-
-## 🎯 Blog Post Ideas
-
-- Step-by-step tutorial: Building a chat application with AI
-- Case study: How I built 3WM SONIK LABS
-- Technical deep-dive: RAG systems explained
-- Quick tips: TypeScript productivity hacks
-- Code review: Analyzing popular open-source projects
-- Project walkthrough: Containerizing applications with Docker
-
-## 📚 Resources
-
-### Learning Paths
-- **Full-Stack Developer:** JavaScript → Node.js → Databases → DevOps
-- **AI/ML Developer:** Python → APIs → LLMs → RAG Systems
-- **Frontend Specialist:** HTML/CSS → JavaScript → React/Vue → Performance
-
-### Recommended Tools
-- **Code Editor:** VS Code with Extensions
-- **Version Control:** Git & GitHub
-- **Testing:** Jest, Vitest, Cypress
-- **Containerization:** Docker & Docker Compose
-- **Monitoring:** Sentry, New Relic, DataDog
-
-## 🔗 Related Resources
-
-- [Main Portfolio](../index.html)
-- [GitHub Profile](https://github.com/FeexSystems)
-- [Professional Resume](../resume/CV.md)
-
-## 📊 Blog Stats
-
-- **Total Articles:** Coming soon...
-- **Total Reads:** In progress
-- **Topics Covered:** Development, AI/ML, Best Practices, Career
-
-## 💬 Engage With Me
-
-- **Share your thoughts** on blog posts
-- **Suggest topics** you'd like me to cover
-- **Ask questions** about development
-- **Share your own experiences** in the discussion section
-
----
-
-**Stay tuned for valuable content on web development, AI integration, and tech career growth!**
-
-*Subscribe by watching this repository for updates.*
+**FEEXSYSTEMS / KNOWLEDGE JOURNAL**  
+*Building digital worlds, one system at a time.*
 
 Last Updated: September 2026

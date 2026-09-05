@@ -9,16 +9,17 @@ Deno.serve(async req => {
   if (eventError) return json({ ok: false, error: eventError.message }, 500);
   if (!event) return json({ ok: true, processed: false, reason: 'No pending event' });
 
-  const { data: entity } = await supabase.from('world_model_entities').select('*').eq('id', `repo:${event.repository.split('/').pop()?.toLowerCase()}`).maybeSingle();
+  const repositoryId = `repo:${event.repository.split('/').pop()?.toLowerCase()}`;
+  const { data: entity } = await supabase.from('world_model_entities').select('*').eq('id', repositoryId).maybeSingle();
   const beforeState = entity || null;
-  const patch = { metadata: { ...(entity?.metadata || {}), lastCommitSha: event.after_sha, lastChangeAt: event.received_at, changedFiles: event.changed_files }, updated_at: new Date().toISOString() };
-  const { error: updateError } = await supabase.from('world_model_entities').update(patch).eq('id', entity?.id || '');
+  const payload = { ...(entity?.payload || {}), lastCommitSha: event.after_sha, lastChangeAt: event.received_at, changedFiles: event.changed_files };
+  const { error: updateError } = await supabase.from('world_model_entities').update({ payload, updated_at: new Date().toISOString() }).eq('id', repositoryId);
   if (updateError && entity) {
     await supabase.from('world_model_events').update({ status: 'ERROR', error: updateError.message }).eq('id', event.id);
     return json({ ok: false, error: updateError.message }, 500);
   }
 
-  await supabase.from('world_model_entity_history').insert({ entity_id: entity?.id || `repo:${event.repository}`, operation: 'REPOSITORY_CHANGE', before_state: beforeState, after_state: { ...(entity || {}), ...patch }, evidence: event.changed_files, source: 'github-webhook' });
+  await supabase.from('world_model_entity_history').insert({ entity_id: repositoryId, operation: 'REPOSITORY_CHANGE', before_state: beforeState, after_state: { ...(entity || {}), payload }, evidence: event.changed_files, source: 'github-webhook' });
   await supabase.from('world_model_proactive_events').insert({ event_type: 'REPOSITORY_CHANGED', priority: 'high', payload: { repository: event.repository, before: event.before_sha, after: event.after_sha, files: event.changed_files } });
   await supabase.from('world_model_events').update({ status: 'PROCESSED', processed_at: new Date().toISOString() }).eq('id', event.id);
   return json({ ok: true, processed: true, eventId: event.id, repository: event.repository });

@@ -14,12 +14,15 @@ import { DigitalTwin } from './digital-twin.js';
 import { DigitalTwinIntelligence } from './phase-iii-f-digital-twin-intelligence.js';
 import { FeexWorldRuntime } from './feex-world-runtime.js';
 
+globalThis.FEEX_AI_ENDPOINT ||= 'https://kqfvfpiygvpsmvipngne.supabase.co/functions/v1/world-model-ai';
+globalThis.FEEX_SUPABASE_ANON_KEY ||= 'sb_publishable_NM8QiYBMZE5ViAgzCMEDnA_d6qGYGtl';
+
 const style = document.createElement('style');
 style.textContent = `.model-telemetry{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(3,7,14,.82);backdrop-filter:blur(14px);font:700 8px Inter,system-ui;letter-spacing:.12em;color:#edf3ff;box-shadow:0 12px 35px rgba(0,0,0,.35)}.model-telemetry small{font:500 7px Inter;color:#8490a3;letter-spacing:.08em}.model-dot{width:6px;height:6px;border-radius:50%;background:#73f6b1;box-shadow:0 0 10px #73f6b1}.voice-nav-btn{border:1px solid rgba(255,255,255,.12);background:transparent;color:#edf3ff;border-radius:12px;padding:5px 7px;font:700 7px Inter;letter-spacing:.1em;cursor:pointer}`;
 document.head.appendChild(style);
 
 const model = buildWorldModel(PERSONA_REGISTRY);
-const intelligence = new ModelBackedIntelligence({ model, llmEndpoint: globalThis.FEEX_AI_ENDPOINT || '' });
+const intelligence = new ModelBackedIntelligence({ model, llmEndpoint: globalThis.FEEX_AI_ENDPOINT });
 const twin = new DigitalTwin(PERSONA_REGISTRY);
 const twinIntelligence = new DigitalTwinIntelligence(twin);
 const temporal = new TemporalWorldModel(model);
@@ -45,11 +48,11 @@ const output = document.querySelector('#navOutput');
 const voice = new VoiceNavigator({ input, navigator: intelligence, onState: state => { voiceButton.textContent = state === 'LISTENING' ? 'LISTENING' : 'MIC'; }, onResult: result => { if (!output) return; output.innerHTML = `<b>VOICE NAVIGATOR</b><p>${result.text || 'No grounded result.'}</p>`; output.hidden = false; } });
 voiceButton.addEventListener('click', () => voice.start() || (voiceButton.textContent = 'UNSUPPORTED'));
 
-if (input && output) input.addEventListener('keydown', async e => { if (e.key !== 'Enter') return; const query = input.value.trim(); if (!query) return; try { const result = await intelligence.ask(query); const paragraph = output.querySelector('p'); if (paragraph) paragraph.textContent = result.text; else output.innerHTML = `<b>MODEL-BACKED NAVIGATOR</b><p>${result.text}</p>`; output.hidden = false; } catch {} }, { passive: true });
+if (input && output) input.addEventListener('keydown', async e => { if (e.key !== 'Enter') return; const query = input.value.trim(); if (!query) return; try { const result = await intelligence.ask(query); const paragraph = output.querySelector('p'); if (paragraph) paragraph.textContent = result.text; else output.innerHTML = `<b>MODEL-BACKED NAVIGATOR</b><p>${result.text}</p>`; output.hidden = false; } catch (error) { output.innerHTML = `<b>MODEL-BACKED NAVIGATOR</b><p>${error?.message || 'Navigator unavailable.'}</p>`; output.hidden = false; } }, { passive: true });
 
 const repositorySeeds = (PERSONA_REGISTRY || []).filter(w => w.repo).map(w => w.repo);
 const detector = new RepositoryChangeDetector({ interval: 300000, onChange: event => { predictive.observe(event); twinIntelligence.ingest({ type:'REPOSITORY_CHANGED', timestamp:new Date().toISOString(), payload:event }); events.emit('REPOSITORY_CHANGED', event, 'high'); agent.observe(createWebhookEvent({ delivery:event.current?.delivery, repository:{ full_name:event.repository }, before:event.previous?.commitSha, after:event.current?.commitSha, ref:event.current?.branch })); } });
-const fetchSnapshot = async repository => { const [owner, repo] = repository.replace('https://github.com/','').split('/'); const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers:{ Accept:'application/vnd.github+json' } }); if (!response.ok) throw new Error(`GitHub ${response.status}`); const data = await response.json(); return { commitSha:data.pushed_at || data.updated_at, branch:data.default_branch, updatedAt:data.updated_at }; };
+const fetchSnapshot = async repository => { const [owner, repo] = repository.replace('https://github.com/','').split('/'); const metaResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers:{ Accept:'application/vnd.github+json' } }); if (!metaResponse.ok) throw new Error(`GitHub ${metaResponse.status}`); const data = await metaResponse.json(); const commitResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits/${encodeURIComponent(data.default_branch)}`, { headers:{ Accept:'application/vnd.github+json' } }); if (!commitResponse.ok) throw new Error(`GitHub commit ${commitResponse.status}`); const commit = await commitResponse.json(); return { commitSha:commit.sha, branch:data.default_branch, updatedAt:data.updated_at }; };
 if (repositorySeeds.length) detector.start(repositorySeeds, fetchSnapshot);
 
 agent.addEventListener('mutation:committed', e => { temporal.snapshot('mutation'); events.emit('WORLD_MODEL_MUTATION', e.detail, 'high'); });

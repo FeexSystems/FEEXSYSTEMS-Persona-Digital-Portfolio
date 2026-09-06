@@ -1,4 +1,4 @@
-export const MUTATION_VERSION = '1.0.0';
+export const MUTATION_VERSION = '1.1.0';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -19,21 +19,22 @@ export class WorldModelMutationEngine {
 
   commit(mutation) {
     this.validate(mutation);
-    const entities = this.model.entities || (this.model.entities = []);
+    const nodes = this.model.nodes || (this.model.nodes = []);
     const edges = this.model.edges || (this.model.edges = []);
     if (mutation.type === 'UPSERT_ENTITY') {
-      const index = entities.findIndex(e => e.id === mutation.entity.id);
-      if (index >= 0) entities[index] = { ...entities[index], ...mutation.entity };
-      else entities.push(mutation.entity);
+      const index = nodes.findIndex(e => e.id === mutation.entity.id);
+      if (index >= 0) nodes[index] = { ...nodes[index], ...mutation.entity };
+      else nodes.push(mutation.entity);
     }
     if (mutation.type === 'UPSERT_EDGE') {
-      const index = edges.findIndex(e => e.id === mutation.edge.id);
-      if (index >= 0) edges[index] = { ...edges[index], ...mutation.edge };
-      else edges.push(mutation.edge);
+      const edge = mutation.edge;
+      const index = edges.findIndex(e => e.id === edge.id || (e.source === edge.source && e.target === edge.target && e.type === edge.type));
+      if (index >= 0) edges[index] = { ...edges[index], ...edge };
+      else edges.push(edge);
     }
     if (mutation.type === 'REMOVE_EDGE') this.model.edges = edges.filter(e => e.id !== mutation.edgeId);
     if (mutation.type === 'REMOVE_ENTITY') {
-      this.model.entities = entities.filter(e => e.id !== mutation.entityId);
+      this.model.nodes = nodes.filter(e => e.id !== mutation.entityId);
       this.model.edges = edges.filter(e => e.source !== mutation.entityId && e.target !== mutation.entityId);
     }
     const committed = { ...mutation, status: 'COMMITTED', committedAt: new Date().toISOString() };

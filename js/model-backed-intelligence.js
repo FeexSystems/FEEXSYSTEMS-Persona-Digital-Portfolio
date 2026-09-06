@@ -47,6 +47,7 @@ export class ModelBackedIntelligence {
     this.model = model;
     this.memory = new NavigatorMemory();
     this.llmEndpoint = llmEndpoint;
+    this.llmAuthToken = globalThis.FEEX_SUPABASE_ANON_KEY || '';
     this.telemetry = { status: 'IDLE', repositories: 0, documents: 0, artifacts: 0, technologies: 0, lastSync: null, errors: 0 };
   }
 
@@ -104,7 +105,9 @@ export class ModelBackedIntelligence {
       this.memory.add('assistant', text, context);
       return { text, context, source: 'world-model' };
     }
-    const response = await fetch(this.llmEndpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ query, worldModel: { schema:this.model.schema, nodes:this.model.nodes, edges:this.model.edges }, retrieved:context.hits, path:context.explanation, memory:this.memory.items }) });
+    const headers = { 'Content-Type':'application/json' };
+    if (this.llmAuthToken) headers.Authorization = `Bearer ${this.llmAuthToken}`;
+    const response = await fetch(this.llmEndpoint, { method:'POST', headers, body:JSON.stringify({ query, worldModel: { schema:this.model.schema, nodes:this.model.nodes, edges:this.model.edges }, retrieved:context.hits, path:context.explanation, memory:this.memory.items }) });
     if (!response.ok) throw new Error(`LLM gateway ${response.status}`);
     const result = await response.json();
     const text = result.text || result.output_text || 'No grounded response returned.';
